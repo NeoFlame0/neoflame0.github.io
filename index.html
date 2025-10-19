@@ -3,138 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NeoFlame</title>
+<title>NeoFlame Site</title>
 <style>
-/* Basic Reset */
+/* Base Styles */
 * { margin:0; padding:0; box-sizing:border-box; }
-body {
-    font-family: 'Inter', sans-serif;
-    background: #000;
-    color: #fff;
-    overflow-x: hidden;
-}
+body { font-family:'Inter', sans-serif; background:#000; color:#fff; overflow-x:hidden; }
 
-/* Loading Screen */
+/* Loader */
 #loader {
-    position:fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    background:#000;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
-    flex-direction:column;
+  position:fixed; top:0; left:0; width:100%; height:100%; background:#000; display:flex; align-items:center; justify-content:center; z-index:9999; transition:opacity 0.5s;
 }
-#loader span {
-    display:block;
-    width:15px; height:15px;
-    margin:5px;
-    background:#ff69b4;
-    border-radius:50%;
-    animation: bounce 0.6s infinite alternate;
-}
-#loader span:nth-child(2){animation-delay:0.2s;}
-#loader span:nth-child(3){animation-delay:0.4s;}
-@keyframes bounce{
-    0%{transform: translateY(0);}
-    100%{transform: translateY(-20px);}
-}
+.loader-text { color:#ff69b4; font-size:2rem; animation:pulse 1.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:0.5}50%{opacity:1} }
 
-/* Animated Background */
-body::before {
-    content:"";
-    position:fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    background: radial-gradient(circle at 20% 80%, #4b0082 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, #8b2563 0%, transparent 50%),
-                linear-gradient(135deg, #0a0a0a 0%, #2d1b3d 50%, #000 100%);
-    z-index:-1;
-    animation: pulse 15s ease-in-out infinite;
-}
-@keyframes pulse {
-    0%,100%{filter: brightness(0.9) hue-rotate(0deg);}
-    50%{filter: brightness(1.1) hue-rotate(20deg);}
-}
+/* Main content hidden initially */
+#main-content { display:none; text-align:center; padding:50px; }
 
-/* Floating shapes */
-.shape {
-    position: absolute;
-    border: 1px solid rgba(255,105,180,0.4);
-    animation: float 20s linear infinite;
-}
-.shape:nth-child(1){width:80px;height:80px;left:10%;top:10%;}
-.shape:nth-child(2){width:50px;height:50px;left:70%;top:30%; border-radius:50%;}
-.shape:nth-child(3){width:100px;height:100px;left:40%;top:60%; transform:rotate(45deg);}
-@keyframes float{
-    0%{transform:translateY(100vh) rotate(0deg); opacity:0;}
-    50%{opacity:1;}
-    100%{transform:translateY(-100px) rotate(360deg); opacity:0;}
-}
-
-/* Glass effect card */
+/* Welcome Glass Card */
 .glass {
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(20px);
-    border:1px solid rgba(255,255,255,0.1);
-    border-radius:20px;
-    box-shadow:0 8px 32px rgba(0,0,0,0.3);
-    padding:50px;
-    margin:150px auto;
-    max-width:500px;
-    text-align:center;
-    color:#ff69b4;
-}
-
-/* Welcome Heading */
-h1 {
-    font-size:4rem;
-    margin-bottom:30px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.3);
+  display:inline-block; padding:50px; margin-top:50px;
 }
 
 /* Explore Button */
 .button {
-    display:inline-block;
-    padding:15px 35px;
-    margin-top:20px;
-    background: linear-gradient(45deg,#ff69b4,#8b2563);
-    color:#fff;
-    border-radius:15px;
-    text-decoration:none;
-    font-size:1.2rem;
-    transition:0.4s;
+  display:inline-block; margin-top:30px; padding:15px 40px;
+  border:2px solid #ff69b4; color:#ff69b4; border-radius:50px;
+  text-decoration:none; font-size:1.2rem; cursor:pointer;
+  transition:0.3s; background:transparent;
 }
-.button:hover{
-    transform: scale(1.1);
-    box-shadow:0 0 20px #ff69b4;
+.button:hover { background:#ff69b4; color:#000; }
+
+/* Explore Section Hidden Initially */
+.explore-section {
+  display:none; padding:100px 20px; text-align:center; 
+  background: radial-gradient(circle, #4b0082 0%, #2d1b3d 100%);
+}
+
+/* Floating shapes in explore section */
+.explore-section .shape {
+  position:absolute; border:1px solid rgba(255,255,255,0.2); border-radius:50%;
+  width:80px; height:80px; animation:floatShape 20s linear infinite;
+}
+@keyframes floatShape {
+  from{transform:translateY(100vh) rotate(0deg); opacity:0;}
+  10%,90%{opacity:1;}
+  to{transform:translateY(-100px) rotate(360deg); opacity:0;}
 }
 
 /* Responsive */
-@media(max-width:600px){
-    h1{font-size:2.5rem;}
-    .glass{margin:100px 20px; padding:30px;}
+@media(max-width:768px){
+  .glass { padding:30px; }
+  .button { padding:12px 30px; font-size:1rem; }
 }
 </style>
 </head>
 <body>
 
-<!-- Loading Screen -->
-<div id="loader">
-    <span></span>
-    <span></span>
-    <span></span>
+<!-- Loader -->
+<div id="loader"><div class="loader-text">Loading NeoFlame...</div></div>
+
+<!-- Main Content -->
+<div id="main-content">
+  <div class="glass">
+    <h1>Welcome</h1>
+    <p>Experience a futuristic neon vibe.</p>
+    <a href="#" class="button">Explore</a>
+  </div>
 </div>
 
-<!-- Floating Shapes -->
-<div class="shape"></div>
-<div class="shape"></div>
-<div class="shape"></div>
-
-<!-- Main Glass Section -->
-<div class="glass" id="main-content" style="display:none;">
-    <h1>Welcome</h1>
-    <a href="#" class="button">Explore</a>
+<!-- Explore Section -->
+<div class="explore-section" id="explore">
+  <h2 style="color:#ff69b4;">Welcome to NeoFlame World</h2>
+  <p style="color:#fff; max-width:600px; margin:20px auto;">
+    This is a cool interactive area. You can add animations, floating shapes, or anything futuristic here.
+  </p>
 </div>
 
 <script>
@@ -145,6 +92,14 @@ window.addEventListener('load', () => {
     loader.style.opacity = '0';
     setTimeout(() => loader.style.display='none', 500);
     main.style.display='block';
+});
+
+// Explore button click
+document.querySelector('.button').addEventListener('click', (e) => {
+    e.preventDefault();
+    const explore = document.getElementById('explore');
+    explore.style.display = 'block';
+    explore.scrollIntoView({behavior:'smooth'});
 });
 </script>
 
