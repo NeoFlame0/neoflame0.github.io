@@ -1,33 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeoFlame</title>
-    <link rel="stylesheet" href="style.css"> <!-- Your CSS file -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeoFlame</title>
+<style>
+/* Basic Reset */
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family: 'Inter', sans-serif;
+    background: #000;
+    color: #e0a3ff;
+    overflow-x: hidden;
+}
+
+/* Animated Background */
+body::before {
+    content:"";
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: radial-gradient(circle at 20% 80%, #4b0082 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, #8b2563 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a0a 0%, #2d1b3d 50%, #000 100%);
+    z-index:-1;
+    animation: pulse 15s ease-in-out infinite;
+}
+@keyframes pulse {
+    0%,100%{filter: brightness(0.9) hue-rotate(0deg);}
+    50%{filter: brightness(1.1) hue-rotate(20deg);}
+}
+
+/* Floating shapes */
+.shape {
+    position: absolute;
+    border: 1px solid rgba(255,105,180,0.4);
+    animation: float 20s linear infinite;
+}
+.shape:nth-child(1){width:80px;height:80px;left:10%;top:10%;}
+.shape:nth-child(2){width:50px;height:50px;left:70%;top:30%; border-radius:50%;}
+.shape:nth-child(3){width:100px;height:100px;left:40%;top:60%; transform:rotate(45deg);}
+@keyframes float{
+    0%{transform:translateY(100vh) rotate(0deg); opacity:0;}
+    50%{opacity:1;}
+    100%{transform:translateY(-100px) rotate(360deg); opacity:0;}
+}
+
+/* Glass effect cards */
+.glass {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(20px);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:20px;
+    box-shadow:0 8px 32px rgba(0,0,0,0.3);
+    padding:30px;
+    margin:50px auto;
+    max-width:600px;
+    text-align:center;
+}
+
+/* Heading */
+h1 {
+    font-size:3rem;
+    margin-bottom:20px;
+    color:#ff69b4;
+}
+
+/* Button */
+.button {
+    display:inline-block;
+    padding:12px 25px;
+    margin-top:15px;
+    background: #8b2563;
+    color:#fff;
+    border-radius:12px;
+    text-decoration:none;
+    transition:0.3s;
+}
+.button:hover{
+    background:#ff69b4;
+}
+</style>
 </head>
 <body>
-    <!-- Background and effects -->
-    <div class="neural-background"></div>
-    <div class="geometric-shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-    <div class="neural-lines">
-        <div class="neural-line"></div>
-        <div class="neural-line"></div>
-        <div class="neural-line"></div>
-    </div>
 
-    <!-- Example content -->
-    <header class="glass">
-        <h1>Welcome to NeoFlame</h1>
-    </header>
-    <main class="glass" style="margin: 50px; padding: 30px;">
-        <p>This is your first page with neural-glass effects.</p>
-        <p>Customize it by adding more HTML elements.</p>
-    </main>
+<div class="shape"></div>
+<div class="shape"></div>
+<div class="shape"></div>
+
+<div class="glass">
+    <h1>Welcome to NeoFlame</h1>
+    <p>Cool neon-style website with floating shapes and glass effects.</p>
+    <a href="#" class="button">Explore</a>
+</div>
+
 </body>
 </html>
