@@ -125,6 +125,11 @@ body {font-family:'Inter', sans-serif; background:#000; color:#fff; overflow-x:h
   <div class="neon-line"></div>
 </div>
 
+<!-- Audio -->
+<audio id="hoverSound" src="https://assets.mixkit.co/sfx/preview/mixkit-fast-small-swoosh-1665.mp3"></audio>
+<audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-fast-click-1220.mp3"></audio>
+<audio id="particleSound" src="https://assets.mixkit.co/sfx/preview/mixkit-quick-small-swish-1668.mp3"></audio>
+
 <script>
 // Loader
 window.addEventListener('load', ()=>{
@@ -136,12 +141,14 @@ window.addEventListener('load', ()=>{
 });
 
 // Explore Button
-document.querySelector('.button').addEventListener('click', (e)=>{
+const exploreBtn = document.querySelector('.button');
+exploreBtn.addEventListener('click', (e)=>{
     e.preventDefault();
-    const explore = document.getElementById('explore');
-    explore.style.display='block';
-    explore.scrollIntoView({behavior:'smooth'});
+    document.getElementById('explore').style.display='block';
+    document.getElementById('explore').scrollIntoView({behavior:'smooth'});
+    document.getElementById('clickSound').play();
 });
+exploreBtn.addEventListener('mouseenter', ()=>document.getElementById('hoverSound').play());
 
 // Neon Particles & Mouse Move
 document.body.addEventListener('mousemove', e=>{
@@ -157,6 +164,8 @@ document.body.addEventListener('mousemove', e=>{
   particle.style.top=`${y}px`;
   document.body.appendChild(particle);
   setTimeout(()=>particle.remove(),500);
+  document.getElementById('particleSound').currentTime = 0;
+  document.getElementById('particleSound').play();
 });
 </script>
 
