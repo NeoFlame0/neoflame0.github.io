@@ -9,9 +9,9 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:'Inter', sans-serif; background:#000; color:#fff; overflow-x:hidden; }
 
-/* Cool Animated Background */
+/* Neon Animated Background */
 .neon-bg {
-  position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1;
+  position:fixed; top:0; left:0; width:100%; height:100%; z-index:-2;
   background: radial-gradient(circle at 15% 85%, rgba(75,0,130,0.7) 0%, transparent 50%),
               radial-gradient(circle at 85% 15%, rgba(139,37,99,0.8) 0%, transparent 50%),
               radial-gradient(circle at 45% 60%, rgba(128,0,128,0.6) 0%, transparent 50%),
@@ -36,10 +36,8 @@ body { font-family:'Inter', sans-serif; background:#000; color:#fff; overflow-x:
 }
 @keyframes spin { 0% {transform:rotate(0deg);} 100% {transform:rotate(360deg);} }
 
-/* Main content hidden initially */
+/* Main content */
 #main-content { display:none; text-align:center; padding:50px; }
-
-/* Welcome Glass Card */
 .glass {
   background: rgba(255,255,255,0.05);
   backdrop-filter: blur(20px);
@@ -48,24 +46,20 @@ body { font-family:'Inter', sans-serif; background:#000; color:#fff; overflow-x:
   box-shadow:0 8px 32px rgba(0,0,0,0.3);
   display:inline-block; padding:50px; margin-top:50px;
 }
-
-/* Explore Button */
 .button {
   display:inline-block; margin-top:30px; padding:15px 40px;
   border:2px solid #ff69b4; color:#ff69b4; border-radius:50px;
-  text-decoration:none; font-size:1.2rem; cursor:pointer;
-  transition:0.3s; background:transparent;
+  text-decoration:none; font-size:1.2rem; cursor:pointer; transition:0.3s; background:transparent;
 }
 .button:hover { background:#ff69b4; color:#000; }
 
-/* Explore Section Hidden Initially */
+/* Explore Section */
 .explore-section {
-  display:none; padding:100px 20px; text-align:center; position:relative;
+  display:none; padding:100px 20px; text-align:center; position:relative; overflow:hidden;
   background: radial-gradient(circle, #4b0082 0%, #2d1b3d 100%);
-  overflow:hidden;
 }
 
-/* Floating shapes in explore section */
+/* Floating Shapes */
 .explore-section .shape {
   position:absolute; border:1px solid rgba(255,255,255,0.2); border-radius:50%;
   width:80px; height:80px; animation:floatShape 20s linear infinite;
@@ -74,6 +68,19 @@ body { font-family:'Inter', sans-serif; background:#000; color:#fff; overflow-x:
   from{transform:translateY(100vh) rotate(0deg); opacity:0;}
   10%,90%{opacity:1;}
   to{transform:translateY(-100px) rotate(360deg); opacity:0;}
+}
+
+/* Neon Lines */
+.neon-line {
+  position:absolute; width:100%; height:2px; background:linear-gradient(90deg, transparent, #ff69b4, transparent);
+  animation:lineMove 3s ease-in-out infinite;
+}
+.neon-line:nth-child(1){ top:20%; animation-delay:0s; }
+.neon-line:nth-child(2){ top:50%; animation-delay:1s; background:linear-gradient(90deg, transparent, #00ffff, transparent);}
+.neon-line:nth-child(3){ top:80%; animation-delay:2s; background:linear-gradient(90deg, transparent, #e0a3ff, transparent);}
+@keyframes lineMove {
+  0%,100%{ transform: scaleX(0.5); opacity:0.2; }
+  50%{ transform: scaleX(1); opacity:1; }
 }
 
 /* Responsive */
@@ -104,29 +111,33 @@ body { font-family:'Inter', sans-serif; background:#000; color:#fff; overflow-x:
 <div class="explore-section" id="explore">
   <h2 style="color:#ff69b4;">Welcome to NeoFlame World</h2>
   <p style="color:#fff; max-width:600px; margin:20px auto;">
-    This is a cool interactive area with neon vibes. Floating shapes and animations make it alive.
+    This is a cool interactive area with neon vibes. Floating shapes and neon lines animate dynamically.
   </p>
-  <!-- Example shapes -->
-  <div class="shape" style="top:20%; left:10%;"></div>
-  <div class="shape" style="top:60%; left:70%; width:60px; height:60px;"></div>
-  <div class="shape" style="top:40%; left:30%; width:100px; height:100px;"></div>
+  <!-- Floating Shapes -->
+  <div class="shape" style="top:10%; left:15%; width:80px; height:80px;"></div>
+  <div class="shape" style="top:40%; left:70%; width:60px; height:60px;"></div>
+  <div class="shape" style="top:70%; left:30%; width:100px; height:100px;"></div>
+  <!-- Neon Lines -->
+  <div class="neon-line"></div>
+  <div class="neon-line"></div>
+  <div class="neon-line"></div>
 </div>
 
 <script>
-// Show main content after loading
+// Loader
 window.addEventListener('load', () => {
     const loader = document.getElementById('loader');
     const main = document.getElementById('main-content');
     loader.style.opacity = '0';
-    setTimeout(() => loader.style.display='none', 500);
+    setTimeout(()=>loader.style.display='none',500);
     main.style.display='block';
 });
 
-// Explore button click
-document.querySelector('.button').addEventListener('click', (e) => {
+// Explore Button
+document.querySelector('.button').addEventListener('click', (e)=>{
     e.preventDefault();
     const explore = document.getElementById('explore');
-    explore.style.display = 'block';
+    explore.style.display='block';
     explore.scrollIntoView({behavior:'smooth'});
 });
 </script>
