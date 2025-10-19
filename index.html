@@ -132,12 +132,21 @@ h1 {
 <div class="shape"></div>
 
 <!-- Main Glass Section -->
-<div class="glass">
+<div class="glass" id="main-content" style="display:none;">
     <h1>Welcome</h1>
     <a href="#" class="button">Explore</a>
 </div>
 
 <script>
-// Hide loader after page loads
+// Show main content after loading
 window.addEventListener('load', () => {
     const loader = document.getElementById('loader');
+    const main = document.getElementById('main-content');
+    loader.style.opacity = '0';
+    setTimeout(() => loader.style.display='none', 500);
+    main.style.display='block';
+});
+</script>
+
+</body>
+</html>
