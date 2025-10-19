@@ -89,6 +89,18 @@ body {font-family:'Inter', sans-serif; background:#000; color:#fff; overflow-x:h
   pointer-events:none;
 }
 
+/* Cursor Trail */
+.cursor-trail{
+  position:absolute; width:15px; height:15px; border-radius:50%; pointer-events:none;
+  background: radial-gradient(circle, #ff69b4 0%, #0000 80%);
+  mix-blend-mode: screen; opacity:0.8;
+  transform: translate(-50%, -50%);
+  animation:fadeTrail 0.5s forwards;
+}
+@keyframes fadeTrail{
+  to{opacity:0; transform: translate(-50%, -50%) scale(0);}
+}
+
 /* Responsive */
 @media(max-width:768px){
   .glass{padding:30px;}
@@ -153,11 +165,14 @@ exploreBtn.addEventListener('mouseenter', ()=>document.getElementById('hoverSoun
 // Neon Particles & Mouse Move
 document.body.addEventListener('mousemove', e=>{
   let x=e.clientX, y=e.clientY;
+
+  // Move shapes slightly
   document.querySelectorAll('.shape').forEach((shape, idx)=>{
       let offset=(idx+1)*10;
       shape.style.transform=`translate(${(x/window.innerWidth-0.5)*offset}px, ${(y/window.innerHeight-0.5)*offset}px)`;
   });
 
+  // Particle effect
   const particle=document.createElement('div');
   particle.className='particle';
   particle.style.left=`${x}px`;
@@ -166,6 +181,14 @@ document.body.addEventListener('mousemove', e=>{
   setTimeout(()=>particle.remove(),500);
   document.getElementById('particleSound').currentTime = 0;
   document.getElementById('particleSound').play();
+
+  // Cursor trail
+  const trail = document.createElement('div');
+  trail.className='cursor-trail';
+  trail.style.left=`${x}px`;
+  trail.style.top=`${y}px`;
+  document.body.appendChild(trail);
+  setTimeout(()=>trail.remove(),500);
 });
 </script>
 
