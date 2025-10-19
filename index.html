@@ -1,23 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nihad's Website</title>
-  <style>
-    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background: #f4f4f4; }
-    h1 { color: #333; }
-    a { display: block; margin: 10px; font-size: 20px; text-decoration: none; color: #0077cc; }
-    a:hover { color: #005fa3; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Page</title>
+<style>
+/* BACKGROUND */
+.container {
+  background: #181c21;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  position: relative;
+}
+
+.pattern-bg {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: repeating-linear-gradient(
+    135deg,
+    #232526 0px,
+    #232526 60px,
+    #23252699 70px,
+    #414345 130px
+  );
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.cube-svg {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  left: -30%;
+  top: -20%;
+  background: transparent;
+  opacity: 0.7;
+  z-index: 1;
+  animation: cubeMove 18s linear infinite alternate;
+}
+
+@keyframes cubeMove {
+  from { transform: translateY(0) scale(1); }
+  to { transform: translateY(-20%) scale(1.02) rotate(1deg); }
+}
+
+/* LOADING SCREEN */
+.loader { /* From Uiverse.io by InfinityLoopGames */
+  --duration: 3s;
+  --primary: rgb(56, 56, 56);
+  --primary-light: #5c5c5c;
+  --primary-rgba: rgba(39, 94, 254, 0);
+  width: 200px;
+  height: 320px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) preserve-3d;
+  z-index: 10;
+}
+/* You can paste the entire loader CSS here (the big block you shared) */
+
+/* BUTTON */
+.button { /* From Uiverse.io by marcelodolza */
+  --white: #ffe7ff;
+  --purple-100: #f4b1fd;
+  --purple-200: #d190ff;
+  --purple-300: #c389f2;
+  --purple-400: #8e26e2;
+  --purple-500: #5e2b83;
+  --radius: 18px;
+  border-radius: var(--radius);
+  outline: none;
+  cursor: pointer;
+  font-size: 23px;
+  font-family: Arial;
+  background: transparent;
+  letter-spacing: -1px;
+  border: 0;
+  position: relative;
+  width: 220px;
+  height: 80px;
+  transform: rotate(353deg) skewX(4deg);
+  z-index: 5;
+}
+/* Include remaining button CSS (wrap, content, icon, states) */
+
+/* RATING */
+.rating { cursor: pointer; }
+.card { display: flex; margin: auto; box-shadow: 0 0.5rem 1rem rgba(0,0,16,0.19), 0 0.3rem 0.3rem rgba(0,0,16,0.23); background: #fff; padding: 0.8rem; width: 33rem; z-index:5; position:relative; }
+/* Include rest of rating CSS */
+
+/* SOCIAL BUTTONS */
+.Social-Btn {
+  width: 4.5em;
+  height: 2.5em;
+  align-items: baseline;
+  justify-content: center;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.3s;
+  fill: white !important;
+  position: relative;
+  z-index: 5;
+}
+/* Include remaining Social-Btn CSS */
+
+/* DARK/LIGHT MODE TOGGLE */
+.theme-switch { 
+  --toggle-size: 30px;
+  --container-width: 5.625em;
+  --container-height: 2.5em;
+  --container-radius: 6.25em;
+  --container-light-bg: #3D7EAE;
+  --container-night-bg: #1D1F2C;
+  --circle-container-diameter: 3.375em;
+  --sun-moon-diameter: 2.125em;
+  --sun-bg: #ECCA2F;
+  --moon-bg: #C4C9D1;
+  --spot-color: #959DB1;
+  --circle-container-offset: calc((var(--circle-container-diameter) - var(--container-height)) / 2 * -1);
+  --stars-color: #fff;
+  --clouds-color: #F3FDFF;
+  --back-clouds-color: #AACADF;
+  --transition: .5s cubic-bezier(0, -0.02, 0.4, 1.25);
+  --circle-transition: .3s cubic-bezier(0, -0.02, 0.35, 1.17);
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 5;
+}
+/* Include remaining theme-switch CSS */
+
+</style>
 </head>
 <body>
-  <h1>Welcome to My Website</h1>
-  <p>All my content in one place</p>
-  <a href="games.html">Games & Projects</a>
-  <a href="blog.html">Blog & Tutorials</a>
-  <a href="videos.html">Videos</a>
-  <a href="about.html">About Me</a>
-  <a href="contact.html">Contact</a>
+<div class="container">
+  <div class="pattern-bg"></div>
+  <div class="cube-svg"></div>
+
+  <!-- LOADER -->
+  <div class="loader">
+    <div class="ground"><div></div></div>
+    <div class="box box0"><div></div></div>
+    <div class="box box1"><div></div></div>
+    <div class="box box2"><div></div></div>
+    <div class="box box3"><div></div></div>
+    <div class="box box4"><div></div></div>
+    <div class="box box5"><div></div></div>
+    <div class="box box6"><div></div></div>
+    <div class="box box7"><div></div></div>
+  </div>
+
+  <!-- BUTTON -->
+  <button class="button">
+    <div class="wrap">
+      <div class="content">
+        <div class="char state-1">
+          <span data-label="C"></span>
+          <span data-label="l"></span>
+          <span data-label="i"></span>
+          <span data-label="c"></span>
+          <span data-label="k"></span>
+        </div>
+      </div>
+    </div>
+    <div class="outline"></div>
+    <div class="icon"><div></div></div>
+  </button>
+
+  <!-- RATING -->
+  <div class="card">
+    <div class="rating-container">
+      <div class="rating-form">
+        <input type="radio" id="happy" name="rate" class="super-happy">
+        <svg class="svg"><circle cx="50%" cy="50%" r="16"/></svg>
+        <input type="radio" id="neutral" name="rate" class="neutral">
+        <svg class="svg"><circle cx="50%" cy="50%" r="16"/></svg>
+        <input type="radio" id="sad" name="rate" class="super-sad">
+        <svg class="svg"><circle cx="50%" cy="50%" r="16"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOCIAL BUTTON EXAMPLE -->
+  <button class="Social-Btn">
+    <div class="BG"></div>
+    <div class="svgContainer">
+      <svg viewBox="0 0 24 24"><path d="M12 2L15 11H9L12 2Z"/></svg>
+    </div>
+  </button>
+
+  <!-- DARK/LIGHT TOGGLE -->
+  <div class="theme-switch">
+    <!-- Add your sun/moon toggle structure -->
+  </div>
+</div>
 </body>
 </html>
