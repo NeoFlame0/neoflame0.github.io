@@ -5,9 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NeoFlame</title>
 <style>
-/* Base Styles */
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Inter', sans-serif; background:#000; color:#fff; overflow-x:hidden; }
+* {margin:0; padding:0; box-sizing:border-box;}
+body {font-family:'Inter', sans-serif; background:#000; color:#fff; overflow-x:hidden; cursor:none;}
 
 /* Neon Animated Background */
 .neon-bg {
@@ -19,99 +18,102 @@ body { font-family:'Inter', sans-serif; background:#000; color:#fff; overflow-x:
               linear-gradient(135deg, #0a0a0a 0%, #2d1b3d 50%, #000 100%);
   animation: bgPulse 14s ease-in-out infinite;
 }
-@keyframes bgPulse {
-  0%,100% { filter: brightness(0.9) saturate(1.4) hue-rotate(0deg); }
-  33% { filter: brightness(1.1) saturate(1.7) hue-rotate(15deg); }
-  66% { filter: brightness(1.0) saturate(1.5) hue-rotate(-10deg); }
+@keyframes bgPulse{
+  0%,100% {filter: brightness(0.9) saturate(1.4) hue-rotate(0deg);}
+  33% {filter: brightness(1.1) saturate(1.7) hue-rotate(15deg);}
+  66% {filter: brightness(1.0) saturate(1.5) hue-rotate(-10deg);}
 }
 
 /* Loader */
-#loader {
-  position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9);
+#loader{
+  position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95);
   display:flex; align-items:center; justify-content:center; z-index:9999; transition:opacity 0.5s;
 }
-.loader-circle {
-  width:60px; height:60px; border:6px solid #ff69b4; border-top-color: transparent; border-radius:50%;
+.loader-circle{
+  width:60px; height:60px; border:6px solid #ff69b4; border-top-color:transparent; border-radius:50%;
   animation: spin 1s linear infinite;
 }
-@keyframes spin { 0% {transform:rotate(0deg);} 100% {transform:rotate(360deg);} }
+@keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
 
 /* Main content */
-#main-content { display:none; text-align:center; padding:50px; }
-.glass {
+#main-content {display:none; text-align:center; padding:50px;}
+.glass{
   background: rgba(255,255,255,0.05);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 20px;
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:20px;
   box-shadow:0 8px 32px rgba(0,0,0,0.3);
   display:inline-block; padding:50px; margin-top:50px;
 }
-.button {
+.button{
   display:inline-block; margin-top:30px; padding:15px 40px;
   border:2px solid #ff69b4; color:#ff69b4; border-radius:50px;
   text-decoration:none; font-size:1.2rem; cursor:pointer; transition:0.3s; background:transparent;
 }
-.button:hover { background:#ff69b4; color:#000; }
+.button:hover{background:#ff69b4;color:#000;}
 
 /* Explore Section */
-.explore-section {
+.explore-section{
   display:none; padding:100px 20px; text-align:center; position:relative; overflow:hidden;
   background: radial-gradient(circle, #4b0082 0%, #2d1b3d 100%);
 }
 
 /* Floating Shapes */
-.explore-section .shape {
+.explore-section .shape{
   position:absolute; border:1px solid rgba(255,255,255,0.2); border-radius:50%;
   width:80px; height:80px; animation:floatShape 20s linear infinite;
+  transition: transform 0.2s ease;
 }
-@keyframes floatShape {
+@keyframes floatShape{
   from{transform:translateY(100vh) rotate(0deg); opacity:0;}
   10%,90%{opacity:1;}
   to{transform:translateY(-100px) rotate(360deg); opacity:0;}
 }
 
 /* Neon Lines */
-.neon-line {
+.neon-line{
   position:absolute; width:100%; height:2px; background:linear-gradient(90deg, transparent, #ff69b4, transparent);
   animation:lineMove 3s ease-in-out infinite;
 }
-.neon-line:nth-child(1){ top:20%; animation-delay:0s; }
-.neon-line:nth-child(2){ top:50%; animation-delay:1s; background:linear-gradient(90deg, transparent, #00ffff, transparent);}
-.neon-line:nth-child(3){ top:80%; animation-delay:2s; background:linear-gradient(90deg, transparent, #e0a3ff, transparent);}
-@keyframes lineMove {
-  0%,100%{ transform: scaleX(0.5); opacity:0.2; }
-  50%{ transform: scaleX(1); opacity:1; }
+.neon-line:nth-child(1){top:20%; animation-delay:0s;}
+.neon-line:nth-child(2){top:50%; animation-delay:1s; background:linear-gradient(90deg, transparent, #00ffff, transparent);}
+.neon-line:nth-child(3){top:80%; animation-delay:2s; background:linear-gradient(90deg, transparent, #e0a3ff, transparent);}
+@keyframes lineMove{
+  0%,100{transform: scaleX(0.5); opacity:0.2;}
+  50%{transform: scaleX(1); opacity:1;}
+}
+
+/* Neon Particles */
+.particle{
+  position:absolute; width:5px; height:5px; border-radius:50%; background:#ff69b4; opacity:0.7;
+  pointer-events:none;
 }
 
 /* Responsive */
 @media(max-width:768px){
-  .glass { padding:30px; }
-  .button { padding:12px 30px; font-size:1rem; }
+  .glass{padding:30px;}
+  .button{padding:12px 30px; font-size:1rem;}
 }
 </style>
 </head>
 <body>
 
-<!-- Neon Background -->
 <div class="neon-bg"></div>
 
-<!-- Loader -->
 <div id="loader"><div class="loader-circle"></div></div>
 
-<!-- Main Content -->
 <div id="main-content">
   <div class="glass">
     <h1>Welcome</h1>
-    <p>Experience a futuristic neon vibe.</p>
+    <p>Experience the ultimate neon vibe.</p>
     <a href="#" class="button">Explore</a>
   </div>
 </div>
 
-<!-- Explore Section -->
 <div class="explore-section" id="explore">
   <h2 style="color:#ff69b4;">Welcome to NeoFlame World</h2>
   <p style="color:#fff; max-width:600px; margin:20px auto;">
-    This is a cool interactive area with neon vibes. Floating shapes and neon lines animate dynamically.
+    Floating neon shapes and glowing lines react to your mouse!
   </p>
   <!-- Floating Shapes -->
   <div class="shape" style="top:10%; left:15%; width:80px; height:80px;"></div>
@@ -125,10 +127,10 @@ body { font-family:'Inter', sans-serif; background:#000; color:#fff; overflow-x:
 
 <script>
 // Loader
-window.addEventListener('load', () => {
+window.addEventListener('load', ()=>{
     const loader = document.getElementById('loader');
     const main = document.getElementById('main-content');
-    loader.style.opacity = '0';
+    loader.style.opacity='0';
     setTimeout(()=>loader.style.display='none',500);
     main.style.display='block';
 });
@@ -139,6 +141,22 @@ document.querySelector('.button').addEventListener('click', (e)=>{
     const explore = document.getElementById('explore');
     explore.style.display='block';
     explore.scrollIntoView({behavior:'smooth'});
+});
+
+// Neon Particles & Mouse Move
+document.body.addEventListener('mousemove', e=>{
+  let x=e.clientX, y=e.clientY;
+  document.querySelectorAll('.shape').forEach((shape, idx)=>{
+      let offset=(idx+1)*10;
+      shape.style.transform=`translate(${(x/window.innerWidth-0.5)*offset}px, ${(y/window.innerHeight-0.5)*offset}px)`;
+  });
+
+  const particle=document.createElement('div');
+  particle.className='particle';
+  particle.style.left=`${x}px`;
+  particle.style.top=`${y}px`;
+  document.body.appendChild(particle);
+  setTimeout(()=>particle.remove(),500);
 });
 </script>
 
